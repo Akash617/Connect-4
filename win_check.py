@@ -3,9 +3,9 @@ from coin import *
 
 def checker():
 	if not avail_pos[0] and not avail_pos[1] \
-			and not avail_pos[2] and not avail_pos[3] \
-			and not avail_pos[4] and not avail_pos[5] \
-			and not avail_pos[6] and not avail_pos[7]:
+		and not avail_pos[2] and not avail_pos[3] \
+		and not avail_pos[4] and not avail_pos[5] \
+		and not avail_pos[6] and not avail_pos[7]:
 		return "Tie"
 
 	for i in range(5):		# Checks all horizontal win conditions

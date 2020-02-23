@@ -11,8 +11,6 @@ board_height = 70
 window = pygame.display.set_mode((window_width, window_height))
 pygame.display.set_caption("Connect 4")
 
-
-clock = pygame.time.Clock()
 run = True
 user = "User1"
 
@@ -22,11 +20,6 @@ arrow = pygame.image.load('downwards_arrow.png')
 
 def make_board():
 	window.blit(board, (board_width, board_height))
-
-
-def text_objects(text, font):
-	text_surface = font.render(text, True, (0, 0, 0))
-	return text_surface, text_surface.get_rect()
 
 
 if __name__ == '__main__':
@@ -39,7 +32,7 @@ if __name__ == '__main__':
 
 			mouse_pos = pygame.mouse.get_pos()
 
-			win_check = checker()		# Checks for a tie
+			win_check = checker()
 			if win_check == "Tie":
 				print("It's a tie!")
 				run = False
@@ -66,7 +59,6 @@ if __name__ == '__main__':
 							user = "User2"
 						else:
 							user = "User1"
-
 				else:
 					pygame.draw.rect(window, (255, 255, 255), (i, 30, 40, 40))
 
@@ -74,6 +66,5 @@ if __name__ == '__main__':
 				window.blit(arrow, (i, -10))
 
 		pygame.display.update()
-		clock.tick(200)
 
 	pygame.quit()
