@@ -8,9 +8,16 @@ The game is also only 2-player. I have yet to implement an AI to make this a sin
 Features to add:
 
 Different AI levels
+
 A menu screen
+
 A victory/defeat/tie screen 
+
 A "play again?" option
+
 Timers for each player
+
 A win/draw/loss count
+
 An undo button
+
