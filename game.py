@@ -41,19 +41,16 @@ if __name__ == '__main__':
 
 			win_check = checker()		# Checks for a tie
 			if win_check == "Tie":
-				print(win_check)
+				print("It's a tie!")
 				run = False
 
 			if win_check == "User1 wins":
-				print(win_check, user1_list)
+				print("Player 1 wins!")
 				run = False
 
 			if win_check == "User2 wins":
-				print(win_check, user2_list)
+				print("Player 2 wins!")
 				run = False
-
-			if event.type == pygame.MOUSEBUTTONDOWN:
-				print(pygame.mouse.get_pos())
 
 			for i in (80, 120, 160, 200, 240, 280, 320, 360):		# Makes boxes above columns that can be clicked to place coins
 				if i < mouse_pos[0] < i+40 and 30 < mouse_pos[1] < 70:
