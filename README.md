@@ -6,6 +6,7 @@ So far, I've only included the necessary features to make sure the game runs and
 The game is also only 2-player. I have yet to implement an AI to make this a single-player game. 
 
 Features to add:
+
 Different AI levels
 A menu screen
 A victory/defeat/tie screen 
