@@ -12,12 +12,6 @@ Features to add:
 
 Different AI levels
 
-A menu screen
-
-A victory/defeat/tie screen 
-
-A "play again?" option
-
 Timers for each player
 
 A win/draw/loss count
