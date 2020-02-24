@@ -19,6 +19,7 @@ run = True
 menu = True
 how_to = False
 end_screen = False
+user = "User1"
 
 board = pygame.image.load('board.jpg')
 arrow = pygame.image.load('downwards_arrow.png')
