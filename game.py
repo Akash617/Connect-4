@@ -1,5 +1,5 @@
-from coin import *
-from win_check import checker
+import win_check
+import pygame
 
 pygame.init()
 
@@ -19,7 +19,6 @@ run = True
 menu = True
 how_to = False
 end_screen = False
-user = "User1"
 
 board = pygame.image.load('board.jpg')
 arrow = pygame.image.load('downwards_arrow.png')
@@ -79,13 +78,18 @@ def how_to_play():
 
 def end_screen_page():
 	small_text = pygame.font.Font("freesansbold.ttf", 20)
-	text_surf, text_rect = text_objects("Congratulations! ", small_text)
-	text_rect.center = (250, 125)
-	window.blit(text_surf, text_rect)
+	if check != "It's a tie!":
+		text_surf, text_rect = text_objects("Congratulations! ", small_text)
+		text_rect.center = (250, 125)
+		window.blit(text_surf, text_rect)
 
-	text_surf, text_rect = text_objects(win_check, small_text)
-	text_rect.center = (250, 175)
-	window.blit(text_surf, text_rect)
+		text_surf, text_rect = text_objects(check, small_text)
+		text_rect.center = (250, 175)
+		window.blit(text_surf, text_rect)
+	else:
+		text_surf, text_rect = text_objects(check, small_text)
+		text_rect.center = (250, 125)
+		window.blit(text_surf, text_rect)
 
 	text_surf, text_rect = text_objects("Back to Main menu", small_text)
 	text_rect.center = (250, 350)
@@ -113,7 +117,7 @@ if __name__ == '__main__':
 
 				pygame.display.update()
 
-				if 150 < mouse_pos[0] < 350 and 50 < mouse_pos[1] < 150:  # Start game button
+				if 150 < mouse_pos[0] < 350 and 50 < mouse_pos[1] < 150:		# Start game button
 					pygame.draw.rect(window, button_color_mouse_over, (150, 50, 200, 100))
 
 					if event.type == pygame.MOUSEBUTTONDOWN:
@@ -121,7 +125,7 @@ if __name__ == '__main__':
 				else:
 					pygame.draw.rect(window, button_color, (150, 50, 200, 100))
 
-				if 150 < mouse_pos[0] < 350 and 150 < mouse_pos[1] < 250:  # How to play button
+				if 150 < mouse_pos[0] < 350 and 150 < mouse_pos[1] < 250:		# How to play button
 					pygame.draw.rect(window, button_color_mouse_over, (150, 150, 200, 100))
 
 					if event.type == pygame.MOUSEBUTTONDOWN:
@@ -130,7 +134,7 @@ if __name__ == '__main__':
 				else:
 					pygame.draw.rect(window, button_color, (150, 150, 200, 100))
 
-				if 150 < mouse_pos[0] < 350 and 250 < mouse_pos[1] < 350:  # Stats button
+				if 150 < mouse_pos[0] < 350 and 250 < mouse_pos[1] < 350:		# Stats button
 					pygame.draw.rect(window, button_color_mouse_over, (150, 250, 200, 100))
 
 					if event.type == pygame.MOUSEBUTTONDOWN:
@@ -149,7 +153,7 @@ if __name__ == '__main__':
 				mouse_pos = pygame.mouse.get_pos()
 				window.fill(board_color)
 
-				if 200 < mouse_pos[0] < 300 and 325 < mouse_pos[1] < 375:  # Start game button
+				if 200 < mouse_pos[0] < 300 and 325 < mouse_pos[1] < 375:		# Start game button
 					pygame.draw.rect(window, button_color_mouse_over, (200, 325, 100, 50))
 
 					if event.type == pygame.MOUSEBUTTONDOWN:
@@ -164,6 +168,9 @@ if __name__ == '__main__':
 		window.fill(board_color)
 
 		if not menu and run:
+			win_check.coin.avail_pos, win_check.coin.user1_list, win_check.coin.user2_list = win_check.coin.reset_game()
+			check = ""
+			user = "User1"
 			make_board()
 
 		while run:		# Main run screen
@@ -176,21 +183,21 @@ if __name__ == '__main__':
 
 				mouse_pos = pygame.mouse.get_pos()
 
-				win_check = checker()
-				if win_check == "It's a Tie!":
-					print(win_check)
-					run = False
+				check = win_check.checker()
+				if check == "It's a tie!":
+					print(check)
 					end_screen = True
+					run = False
 
-				if win_check == "Player 1 wins!":
-					print(win_check)
-					run = False
+				if check == "Player 1 wins!":
+					print(check)
 					end_screen = True
+					run = False
 
-				if win_check == "Player 2 wins!":
-					print(win_check)
-					run = False
+				if check == "Player 2 wins!":
+					print(check)
 					end_screen = True
+					run = False
 
 				for i in (
 						80, 120, 160, 200, 240, 280, 320,
@@ -200,7 +207,7 @@ if __name__ == '__main__':
 
 						if event.type == pygame.MOUSEBUTTONDOWN:
 							try:
-								coin1 = Coin(window, user, ((i/40)-2)).make_coin()
+								coin1 = win_check.coin.Coin(window, user, ((i/40)-2)).make_coin()
 							except IndexError:
 								print("This column is full!")
 
@@ -231,14 +238,14 @@ if __name__ == '__main__':
 					pygame.draw.rect(window, button_color_mouse_over, (150, 325, 200, 50))
 
 					if event.type == pygame.MOUSEBUTTONDOWN:
+						menu = True
 						end_screen = False
-						run = True
+
 				else:
 					pygame.draw.rect(window, button_color, (150, 325, 200, 50))
 
 				end_screen_page()
 			pygame.display.update()
 		window.fill(board_color)
-
 
 	pygame.quit()
